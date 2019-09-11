@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { CreateSectionsComponent } from './administrator/create-sections/create-sections.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CreateCoursesComponent } from './administrator/create-courses/create-courses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateSectionsComponent
+    CreateSectionsComponent,
+    CreateCoursesComponent
   ],
   imports: [
     BrowserModule,
