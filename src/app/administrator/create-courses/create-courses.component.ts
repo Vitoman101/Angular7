@@ -31,7 +31,7 @@ export class CreateCoursesComponent implements OnInit {
 
   save() {
     this.coursesService.createCourse(this.course, this.course.id_section)
-      .subscribe(]
+      .subscribe(
         data => {
           console.log(data);
           this.submitted = true;
