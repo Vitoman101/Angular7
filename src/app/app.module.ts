@@ -7,12 +7,16 @@ import { CreateSectionsComponent } from './administrator/create-sections/create-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CreateCoursesComponent } from './administrator/create-courses/create-courses.component';
+import { CreateLoginComponent } from './administrator/create-login/create-login.component';
+import { CreateUsersComponent } from './administrator/create-users/create-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateSectionsComponent,
-    CreateCoursesComponent
+    CreateCoursesComponent,
+    CreateLoginComponent,
+    CreateUsersComponent
   ],
   imports: [
     BrowserModule,
