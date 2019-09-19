@@ -14,5 +14,9 @@
     "/api/v1/logins": {
       "target": "http://localhost:8080",
       "secure": false
-    }
+    },
+    "/api/v1/adverts": {
+    "target": "http://localhost:8080",
+    "secure": false
+  }
   }

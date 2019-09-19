@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { CreateCoursesComponent } from './administrator/create-courses/create-courses.component';
 import { CreateLoginComponent } from './administrator/create-login/create-login.component';
 import { CreateUsersComponent } from './administrator/create-users/create-users.component';
+import { CreateAdvertsComponent } from './administrator/create-adverts/create-adverts.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CreateUsersComponent } from './administrator/create-users/create-users.
     CreateSectionsComponent,
     CreateCoursesComponent,
     CreateLoginComponent,
-    CreateUsersComponent
+    CreateUsersComponent,
+    CreateAdvertsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
 export class Users {
     id: number;
-    firstName: String;
-    lastName: String;
-    description: String;
-    emailId: String;
-    imageUrl: String;
+    firstName: string;
+    lastName: string;
+    description: string;
+    emailId: string;
+    imageUrl: string;
 }
