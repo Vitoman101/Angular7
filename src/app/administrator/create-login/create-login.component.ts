@@ -58,7 +58,7 @@ export class CreateLoginComponent implements OnInit {
         }
       );
     }
-  
+
     onSubmit() {
       this.save();
     }

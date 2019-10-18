@@ -10,6 +10,12 @@ import { CreateCoursesComponent } from './administrator/create-courses/create-co
 import { CreateLoginComponent } from './administrator/create-login/create-login.component';
 import { CreateUsersComponent } from './administrator/create-users/create-users.component';
 import { CreateAdvertsComponent } from './administrator/create-adverts/create-adverts.component';
+import { HeaderComponent } from './header/header.component';
+import { RegisterComponent } from './unauthenticated/register/register.component';
+import { LoginComponent } from './unauthenticated/login/login.component';
+import { CallbackComponent } from './callback/callback.component';
+import { ProfileComponent } from './authenticated/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +24,12 @@ import { CreateAdvertsComponent } from './administrator/create-adverts/create-ad
     CreateCoursesComponent,
     CreateLoginComponent,
     CreateUsersComponent,
-    CreateAdvertsComponent
+    CreateAdvertsComponent,
+    HeaderComponent,
+    RegisterComponent,
+    LoginComponent,
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

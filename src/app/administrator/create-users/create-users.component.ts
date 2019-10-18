@@ -37,9 +37,9 @@ export class CreateUsersComponent implements OnInit {
           this.errorStatus = true;
         }
       );
-      console.log(this.user.emailId, this.user.firstName);
+    console.log(this.user.emailId, this.user.firstName);
     this.user = new Users();
-    
+
   }
 
   onSubmit() {
