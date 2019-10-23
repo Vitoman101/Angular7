@@ -1,3 +1,9 @@
 <pre *ngIf="auth.userProfile$ | async as profile">
     <code>{{ profile | json }}</code>
+
+    <img src={{profile.picture}} style="height:150px; width:150px; border: 1px black solid">
+
+    <h1>{{profile.name}}</h1>
+
+    
     </pre>
