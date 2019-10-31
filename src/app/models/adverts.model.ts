@@ -5,6 +5,7 @@ export class Adverts {
   datePosted: Date;
   pricePerUnit: number;
   unitOfMeasure: string;
-  id_user: number;
+  nicknamePoster: string;
+  phone: string;
   id_course: number;
 }

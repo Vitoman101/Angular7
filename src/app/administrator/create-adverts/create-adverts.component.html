@@ -1,49 +1,55 @@
-<div class="col-lg-4">
-  <h3>Create Courses</h3>
-  <div [hidden]="submitted">
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="title">Title of advertisement</label>
-        <input type="text" class="form-control" id="title" required [(ngModel)]="advert.title" name="title">
-      </div>
-      <div class="form-group">
-        <label for="description">Description of advertisement</label>
-        <input type="text" class="form-control" id="description" required [(ngModel)]="advert.description" name="description">
-      </div>
-      <div class="form-group">
-        <label for="pricePerUnit">Price per unit</label>
-        <input type="number" class="form-control" id="pricePerUnit" required [(ngModel)]="advert.pricePerUnit" name="pricePerUnit">
-      </div>
-      <div class="form-group">
-        <label for="unitOfMeasure">Unit of measure</label>
-        <input type="text" class="form-control" id="unitOfMeasure" required [(ngModel)]="advert.unitOfMeasure" name="unitOfMeasure">
-      </div>
-      <div class="form-group">
-        <label for="datePosted">Date posted</label>
-        <input type="text" class="form-control" id="datePosted" required [(ngModel)]="advert.datePosted" name="datePosted">
-      </div>
-      <div class="form-group">
-        <label for="id_user">Select user</label>
-        <select class="form-control" id="id_user" name="id_user" [(ngModel)]="advert.id_user">
-          <option *ngFor="let user of users" [ngValue]="user.id">{{user.firstName}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="id_user">Select course</label>
-        <select class="form-control" id="id_course" name="id_course" [(ngModel)]="advert.id_course">
-          <option *ngFor="let course of courses" [ngValue]="course.id">{{course.title}}</option>
-        </select>
-      </div>
+<div style="background-color: lightgray">
+  <div class="col-lg-4">
+    <h3>Create Courses</h3>
+    <div [hidden]="submitted">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Title of advertisement</label>
+          <input type="text" class="form-control" id="title" required [(ngModel)]="advert.title" name="title">
+        </div>
+        <div class="form-group">
+          <label for="description">Description of advertisement</label>
+          <input type="text" class="form-control" id="description" required [(ngModel)]="advert.description"
+            name="description">
+        </div>
+        <div class="form-group">
+          <label for="pricePerUnit">Price per unit</label>
+          <input type="number" class="form-control" id="pricePerUnit" required [(ngModel)]="advert.pricePerUnit"
+            name="pricePerUnit">
+        </div>
+        <div class="form-group">
+          <label for="unitOfMeasure">Unit of measure</label>
+          <input type="text" class="form-control" id="unitOfMeasure" required [(ngModel)]="advert.unitOfMeasure"
+            name="unitOfMeasure">
+        </div>
+        <div class="form-group">
+          <label for="datePosted">Date posted</label>
+          <input type="text" class="form-control" id="datePosted" required [(ngModel)]="advert.datePosted"
+            name="datePosted">
+        </div>
+        <div class="form-group">
+          <label for="id_user">Select user</label>
+          <select class="form-control" id="id_user" name="id_user" [(ngModel)]="advert.id_user">
+            <option *ngFor="let user of users" [ngValue]="user.id">{{user.firstName}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="id_user">Select course</label>
+          <select class="form-control" id="id_course" name="id_course" [(ngModel)]="advert.id_course">
+            <option *ngFor="let course of courses" [ngValue]="course.id">{{course.title}}</option>
+          </select>
+        </div>
 
 
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
   </div>
-</div>
-<div [hidden]="!submitted">
-  <h4>You submitted successfully!</h4>
-</div>
+  <div [hidden]="!submitted">
+    <h4>You submitted successfully!</h4>
+  </div>
 
-<div *ngIf="errorStatus">
-  <h4>{{errorMessage}}</h4>
+  <div *ngIf="errorStatus">
+    <h4>{{errorMessage}}</h4>
+  </div>
 </div>

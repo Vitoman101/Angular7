@@ -15,8 +15,8 @@ export class AdvertsService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createAdvert(advert: object, userId: number, courseId: number): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/${userId}/${courseId}`, advert);
+  createAdvert(advert: object, courseId: number): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/${courseId}`, advert);
   }
 
   updateAdvert(id: number, value: any): Observable<Object> {

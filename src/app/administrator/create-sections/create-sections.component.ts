@@ -13,8 +13,8 @@ export class CreateSectionsComponent implements OnInit {
   submitted = false;
   errorStatus = false;
   errorMessage = '';
-  
-  
+
+
 
   constructor(private sectionService: SectionsService) { }
 

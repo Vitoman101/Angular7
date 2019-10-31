@@ -1,9 +1,59 @@
-<pre *ngIf="auth.userProfile$ | async as profile">
-    <code>{{ profile | json }}</code>
+<div style="background-color: lightgray" class="container pb-3" *ngIf="auth.userProfile$ | async as profile">
 
-    <img src={{profile.picture}} style="height:150px; width:150px; border: 1px black solid">
+  <div class="row pt-2">
+    <img class="col-md-3 rounded rounded-circle" src={{profile.picture}}>
 
-    <h1>{{profile.name}}</h1>
+    <ul>
+      <li>
+        <h2 class="font-weight-light display-3">{{profile.name}}</h2>
+      </li>
+      <li>
+        <p>
+          <strong>E-mail: </strong>{{profile.email}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Nickname: </strong> {{profile.nickname}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Locale: </strong>{{profile.locale | uppercase }}
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Verified user: </strong> {{profile.email_verified}}
+        </p>
+      </li>
+    </ul>
+  </div>
 
-    
-    </pre>
+  <div class="pt-4">
+    <h3>My advertisements:</h3>
+    <hr>
+  </div>
+
+  <!--<ul *ngFor="let advert of adverts">
+    <li *ngIf="advert.nicknamePoster == profile.nickname">
+      <span>{{advert.title}} - {{advert.nicknamePoster}}</span>
+    </li>
+  </ul> -->
+
+  <div class="card m-3">
+    <h3 class="card-header text-center">Moji kursevi:</h3>
+    <div class="card-body">
+      <div *ngFor="let advert of adverts">
+        <div *ngIf="advert.nicknamePoster == profile.nickname"><strong>{{advert.title}} </strong> -
+          {{advert.datePosted | date}} - <small>{{advert.pricePerUnit}}</small> - {{advert.nicknamePoster}}
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+      <jw-pagination [items]="adverts" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+  </div>
+
+</div>

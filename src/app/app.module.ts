@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,7 @@ import { RegisterComponent } from './unauthenticated/register/register.component
 import { LoginComponent } from './unauthenticated/login/login.component';
 import { CallbackComponent } from './callback/callback.component';
 import { ProfileComponent } from './authenticated/profile/profile.component';
-
+import { AdvertisementComponent } from './authenticated/advertisement/advertisement.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { ProfileComponent } from './authenticated/profile/profile.component';
     RegisterComponent,
     LoginComponent,
     CallbackComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdvertisementComponent,
+    JwPaginationComponent
   ],
   imports: [
     BrowserModule,

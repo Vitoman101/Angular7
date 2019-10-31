@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+
+  public role;
+
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
@@ -70,7 +73,7 @@ export class AuthService {
     });
   }
 
-  login(redirectPath: string = '/') {
+  login(redirectPath: string = '/profile') {
     // A desired redirect path can be passed to login method
     // (e.g., from a route guard)
     // Ensure Auth0 client instance exists

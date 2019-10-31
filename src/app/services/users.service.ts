@@ -11,11 +11,11 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(id: number): Observable<Object> { 
+  getUser(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createUser(user: object): Observable<Object> { 
+  createUser(user: object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, user);
   }
 

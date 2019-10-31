@@ -1,0 +1,67 @@
+<section class="bg-info" id="title-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center py-4">
+        <h1 class="font-weight-bold text-warning display-4">Advertisement</h1>
+        <p class="lead">Please fill in form below with requested informations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 py-2">
+        <div [hidden]="!submitted">
+          <h4>You submitted successfully!</h4>
+        </div>
+
+
+        <div *ngIf="errorStatus">
+          <h4>{{errorMessage}}</h4>
+        </div>
+        <div [hidden]="submitted">
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="title">Naslov reklame:</label>
+              <input type="text" class="form-control" id="title" required [(ngModel)]="advert.title" name="title"
+                placeholder="Dajem časove matematike povoljno">
+            </div>
+            <div class="form-group">
+              <label for="description">Opis:</label>
+              <textarea type="text" class="form-control" id="description" required [(ngModel)]="advert.description"
+                name="description" rows="3"></textarea>
+              <small class="text-secondary">Napišite nešto o vašem predavanju, gde ste radili ili slične korisne
+                informacije za one koje
+                interesuje ovaj oglas</small>
+            </div>
+            <div class="form-group">
+              <label for="pricePerUnit">Cena po času:</label>
+              <input type="number" class="form-control" id="pricePerUnit" required [(ngModel)]="advert.pricePerUnit"
+                name="pricePerUnit" placeholder="Navedite cenu u dinarima">
+            </div>
+            <div class="form-group">
+              <label for="unitOfMeasure">Trajanje časa:</label>
+              <input type="number" class="form-control" id="unitOfMeasure" required [(ngModel)]="advert.unitOfMeasure"
+                name="unitOfMeasure" placeholder="Navedite trajanje časa u minutama">
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon:</label>
+              <input type="text" class="form-control" id="phone" required [(ngModel)]="advert.phone" name="phone"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                placeholder="065555555">
+            </div>
+            <div class="form-group">
+              <label for="id_user">Select course</label>
+              <select class="form-control" id="id_course" name="id_course" [(ngModel)]="advert.id_course">
+                <option *ngFor="let course of courses" [ngValue]="course.id">{{course.title}}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

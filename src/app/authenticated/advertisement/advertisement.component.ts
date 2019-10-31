@@ -5,13 +5,14 @@ import { Courses } from '../../models/courses.model';
 import { AdvertsService } from '../../services/adverts.service';
 import { UsersService } from '../../services/users.service';
 import { CoursesService } from '../../services/courses.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-create-adverts',
-  templateUrl: './create-adverts.component.html',
-  styleUrls: ['./create-adverts.component.css']
+  selector: 'app-advertisement',
+  templateUrl: './advertisement.component.html',
+  styleUrls: ['./advertisement.component.css']
 })
-export class CreateAdvertsComponent implements OnInit {
+export class AdvertisementComponent implements OnInit {
 
   advert: Adverts = new Adverts();
   submitted = false;
@@ -20,7 +21,7 @@ export class CreateAdvertsComponent implements OnInit {
   users: Users[] = [];
   courses: Courses[] = [];
 
-  constructor(private advertService: AdvertsService, private userService: UsersService, private courseService: CoursesService) { }
+  constructor(public auth: AuthService, private advertService: AdvertsService, private userService: UsersService, private courseService: CoursesService) { }
 
   ngOnInit() {
     this.fillUsers();
@@ -28,6 +29,8 @@ export class CreateAdvertsComponent implements OnInit {
   }
 
   save() {
+    this.advert.nicknamePoster = this.auth.userProfile$.source.value.nickname;
+    this.advert.datePosted = new Date();
     this.advertService.createAdvert(this.advert, this.advert.id_course)
       .subscribe(
         data => {
@@ -76,5 +79,6 @@ export class CreateAdvertsComponent implements OnInit {
   onSubmit() {
     this.save();
   }
+
 
 }
