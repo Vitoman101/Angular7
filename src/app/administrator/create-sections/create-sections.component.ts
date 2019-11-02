@@ -13,17 +13,34 @@ export class CreateSectionsComponent implements OnInit {
   submitted = false;
   errorStatus = false;
   errorMessage = '';
+  sections: Sections[] = [];
 
 
 
   constructor(private sectionService: SectionsService) { }
 
   ngOnInit() {
+    this.fillSections();
   }
 
   newSection(): void {
     this.submitted = false;
     this.section = new Sections();
+  }
+
+  delete(id: number) {
+    this.sectionService.deleteSection(id)
+      .subscribe(
+        data => {
+          console.log(data)
+          this.fillSections();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.errorStatus = true;
+        }
+      )
   }
 
   save() {
@@ -32,6 +49,7 @@ export class CreateSectionsComponent implements OnInit {
         data => {
           console.log(data);
           this.submitted = true;
+          this.fillSections();
         },
         error => {
           console.log(error);
@@ -44,6 +62,13 @@ export class CreateSectionsComponent implements OnInit {
 
   onSubmit() {
     this.save();
+  }
+
+  fillSections() {
+    this.sectionService.getSectionList()
+      .subscribe(data => {
+        this.sections = data;
+      })
   }
 
 }

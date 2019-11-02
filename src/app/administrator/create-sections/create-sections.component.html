@@ -1,26 +1,58 @@
-<div style="background-color: lightgray">
-  <h3>Create Section</h3>
-  <div [hidden]="submitted" style="width: 400px;">
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Title of section</label>
-        <input type="text" class="form-control" id="title" required [(ngModel)]="section.title" name="title">
+<div class="container bg-light">
+  <div class="row p-3">
+    <div class="col-md-6">
+      <h3>Create Section</h3>
+      <div *ngIf="errorStatus">
+        <h4>{{errorMessage}}</h4>
       </div>
-
-      <div class="form-group">
-        <label for="name">Description of section</label>
-        <input type="text" class="form-control" id="description" required [(ngModel)]="section.description"
-          name="description">
+      <div [hidden]="!submitted">
+        <h4>You submitted successfully!</h4>
+        <button class="btn btn-outline-primary" (click)="submitted=false">Back</button>
       </div>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
+      <div [hidden]="submitted" style="width: 400px;">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name">Title of section</label>
+            <input type="text" class="form-control" id="title" required [(ngModel)]="section.title" name="title">
+          </div>
 
-  <div [hidden]="!submitted">
-    <h4>You submitted successfully!</h4>
-  </div>
+          <div class="form-group">
+            <label for="name">Description of section</label>
+            <input type="text" class="form-control" id="description" required [(ngModel)]="section.description"
+              name="description">
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered" cdk-table [dataSource]="sections">
+        <!-- Section title Definition -->
+        <ng-container cdkColumnDef="title">
+          <th cdk-header-cell *cdkHeaderCellDef> Title </th>
+          <td cdk-cell *cdkCellDef="let row"> {{row.title}} </td>
+        </ng-container>
 
-  <div *ngIf="errorStatus">
-    <h4>{{errorMessage}}</h4>
+        <!-- Age Definition -->
+        <ng-container cdkColumnDef="description">
+          <th cdk-header-cell *cdkHeaderCellDef> Description </th>
+          <td cdk-cell *cdkCellDef="let row"> {{row.description}} </td>
+        </ng-container>
+
+        <!-- Title Definition -->
+        <ng-container cdkColumnDef="id">
+          <th cdk-header-cell *cdkHeaderCellDef> Delete </th>
+          <td cdk-cell *cdkCellDef="let row">
+            <button type="button" (click)="delete(row.id)" class="btn btn-danger">
+              <i class="navbar-toggler-icon fa fa-trash"></i>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <tr cdk-header-row *cdkHeaderRowDef="['title', 'description', 'id']"></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: ['title', 'description', 'id']"></tr>
+      </table>
+    </div>
   </div>
 </div>
