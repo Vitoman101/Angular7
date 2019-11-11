@@ -5,6 +5,7 @@ import { Courses } from '../../models/courses.model';
 import { AdvertsService } from '../../services/adverts.service';
 import { UsersService } from '../../services/users.service';
 import { CoursesService } from '../../services/courses.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create-adverts',
@@ -19,20 +20,26 @@ export class CreateAdvertsComponent implements OnInit {
   errorMessage = '';
   users: Users[] = [];
   courses: Courses[] = [];
+  adverts: Adverts[] = [];
 
-  constructor(private advertService: AdvertsService, private userService: UsersService, private courseService: CoursesService) { }
+  constructor(private advertService: AdvertsService, private userService: UsersService, private courseService: CoursesService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.fillUsers();
     this.fillCourses();
+    this.fillAdverts();
   }
 
   save() {
+    this.auth.userProfile$.subscribe(data => {
+      this.advert.nicknamePoster = data.nickname
+    })
+    this.advert.datePosted = new Date();
     this.advertService.createAdvert(this.advert, this.advert.id_course)
       .subscribe(
         data => {
           console.log(data);
           this.submitted = true;
+          this.fillAdverts();
         },
         error => {
           console.log(error);
@@ -43,20 +50,7 @@ export class CreateAdvertsComponent implements OnInit {
     this.advert = new Adverts();
   }
 
-  fillUsers() {
-    this.userService.getUserList()
-      .subscribe(
-        data => {
-          console.log(data);
-          this.users = data;
-        },
-        error => {
-          console.log(error);
-          this.errorMessage = error.message;
-          this.errorStatus = true;
-        }
-      );
-  }
+
 
   fillCourses() {
     this.courseService.getCourseList()
@@ -73,8 +67,38 @@ export class CreateAdvertsComponent implements OnInit {
       );
   }
 
+  delete(id: number) {
+    this.advertService.deleteAdvert(id)
+      .subscribe(
+        data => {
+          console.log(data)
+          this.fillAdverts();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.errorStatus = true;
+        }
+      )
+  }
+
   onSubmit() {
     this.save();
+  }
+
+  fillAdverts() {
+    this.advertService.getAdvertList()
+      .subscribe(
+        data => {
+          console.log(data);
+          this.adverts = data;
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.errorStatus = true;
+        }
+      )
   }
 
 }

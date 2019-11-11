@@ -46,7 +46,10 @@
     <div class="card-body">
       <div *ngFor="let advert of adverts">
         <div *ngIf="advert.nicknamePoster == profile.nickname"><strong>{{advert.title}} </strong> -
-          {{advert.datePosted | date}} - <small>{{advert.pricePerUnit}}</small> - {{advert.nicknamePoster}}
+          Posted: {{advert.datePosted | date}} - Price: {{advert.pricePerUnit}}RSD /{{advert.unitOfMeasure}}min.
+          <button type="button" (click)="delete(advert.id)" class="btn btn-danger float-right">
+            <i class="navbar-toggler-icon fa fa-trash"></i>
+          </button>
           <hr>
         </div>
       </div>

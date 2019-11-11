@@ -11,17 +11,19 @@ import { SectionsService } from 'src/app/services/sections.service';
 })
 export class CreateCoursesComponent implements OnInit {
 
-  
+
   course: Courses = new Courses();
   submitted = false;
   errorStatus = false;
   errorMessage = '';
   section: Sections[] = [];
+  courses: Courses[] = [];
 
   constructor(private coursesService: CoursesService, private sectionService: SectionsService) { }
 
   ngOnInit() {
     this.fillSections();
+    this.fillCourses();
   }
 
   newCourse(): void {
@@ -35,6 +37,7 @@ export class CreateCoursesComponent implements OnInit {
         data => {
           console.log(data);
           this.submitted = true;
+          this.fillCourses();
         },
         error => {
           console.log(error);
@@ -46,18 +49,48 @@ export class CreateCoursesComponent implements OnInit {
   }
 
   fillSections() {
-  this.sectionService.getSectionList()
-    .subscribe(
-      data => {
-        console.log(data);
-        this.section = data;
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.message;
-        this.errorStatus = true;
-      }
-    );
+    this.sectionService.getSectionList()
+      .subscribe(
+        data => {
+          console.log(data);
+          this.section = data;
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.errorStatus = true;
+        }
+      );
+  }
+
+  fillCourses() {
+    this.coursesService.getCourseList()
+      .subscribe(
+        data => {
+          console.log(data);
+          this.courses = data;
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.errorStatus = true;
+        }
+      )
+  }
+
+  delete(id: number) {
+    this.coursesService.deleteCourse(id)
+      .subscribe(
+        data => {
+          console.log(data)
+          this.fillCourses();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.errorStatus = true;
+        }
+      )
   }
 
   onSubmit() {

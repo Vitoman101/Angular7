@@ -18,6 +18,9 @@ import { LoginComponent } from './unauthenticated/login/login.component';
 import { CallbackComponent } from './callback/callback.component';
 import { ProfileComponent } from './authenticated/profile/profile.component';
 import { AdvertisementComponent } from './authenticated/advertisement/advertisement.component';
+import { SearchComponent } from './authenticated/search/search.component';
+import { FilterPipe } from './authenticated/search/filter.pipe';
+import { DetailsComponent } from './authenticated/search/details/details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { AdvertisementComponent } from './authenticated/advertisement/advertisem
     CallbackComponent,
     ProfileComponent,
     AdvertisementComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    SearchComponent,
+    FilterPipe,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

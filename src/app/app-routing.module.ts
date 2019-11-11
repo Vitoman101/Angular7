@@ -14,6 +14,8 @@ import { AuthGuard } from './auth.guard';
 import { InterceptorService } from './services/interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdvertisementComponent } from './authenticated/advertisement/advertisement.component';
+import { SearchComponent } from './authenticated/search/search.component';
+import { DetailsComponent } from './authenticated/search/details/details.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'advertisement', component: AdvertisementComponent, canActivate: [AuthGuard] }
+  { path: 'advertisement', component: AdvertisementComponent, canActivate: [AuthGuard] },
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+  { path: 'details/:id', component: DetailsComponent }
 ];
 
 @NgModule({

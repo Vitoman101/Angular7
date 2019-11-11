@@ -1,32 +1,69 @@
-<div style="background-color: lightgray">
-  <div class="col-lg-4">
-    <h3>Create Courses</h3>
-    <div [hidden]="submitted">
-      <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="title">Title of course</label>
-          <input type="text" class="form-control" id="title" required [(ngModel)]="course.title" name="title">
-        </div>
-        <div class="form-group">
-          <label for="code">Code of course</label>
-          <input type="text" class="form-control" id="code" required [(ngModel)]="course.code" name="code">
-        </div>
-        <div class="form-group">
-          <label for="id_section">Select Section</label>
-          <select class="form-control" id="id_section" name="id_section" [(ngModel)]="course.id_section">
-            <option *ngFor="let sekcija of section" [ngValue]="sekcija.id">{{sekcija.title}}</option>
-          </select>
-        </div>
+<div class="container bg-light">
+  <div class="row p-3">
+    <div class="col-md-6">
+      <h3>Create Courses</h3>
 
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
+      <div [hidden]="!submitted">
+        <h4>You submitted successfully!</h4>
+        <button class="btn btn-outline-primary" (click)="submitted=false">Back</button>
+      </div>
+
+      <div *ngIf="errorStatus">
+        <h4>{{errorMessage}}</h4>
+      </div>
+
+      <div [hidden]="submitted">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="title">Title of course</label>
+            <input type="text" class="form-control" id="title" required [(ngModel)]="course.title" name="title">
+          </div>
+          <div class="form-group">
+            <label for="code">Code of course</label>
+            <input type="text" class="form-control" id="code" required [(ngModel)]="course.code" name="code">
+          </div>
+          <div class="form-group">
+            <label for="id_section">Select Section</label>
+            <select class="form-control" id="id_section" name="id_section" [(ngModel)]="course.id_section">
+              <option *ngFor="let sekcija of section" [ngValue]="sekcija.id">{{sekcija.title}}</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered" cdk-table [dataSource]="courses">
+        <!-- Section title Definition -->
+        <ng-container cdkColumnDef="title">
+          <th cdk-header-cell *cdkHeaderCellDef> Title </th>
+          <td cdk-cell *cdkCellDef="let row"> {{row.title}} </td>
+        </ng-container>
+
+        <!-- Age Definition -->
+        <ng-container cdkColumnDef="code">
+          <th cdk-header-cell *cdkHeaderCellDef> Description </th>
+          <td cdk-cell *cdkCellDef="let row"> {{row.code}} </td>
+        </ng-container>
+
+        <!-- Title Definition -->
+        <ng-container cdkColumnDef="id">
+          <th cdk-header-cell *cdkHeaderCellDef> Delete </th>
+          <td cdk-cell *cdkCellDef="let row">
+            <button type="button" (click)="delete(row.id)" class="btn btn-danger">
+              <i class="navbar-toggler-icon fa fa-trash"></i>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <tr cdk-header-row *cdkHeaderRowDef="['title', 'code', 'id']"></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: ['title', 'code', 'id']"></tr>
+      </table>
     </div>
   </div>
-  <div [hidden]="!submitted">
-    <h4>You submitted successfully!</h4>
-  </div>
 
-  <div *ngIf="errorStatus">
-    <h4>{{errorMessage}}</h4>
-  </div>
+
+
 </div>

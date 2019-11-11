@@ -15,6 +15,9 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/advertisement" *ngIf="auth.loggedIn">Add New Advert</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/search" *ngIf="auth.loggedIn">Search</a>
+      </li>
       <li class="nav-item dropdown" *ngIf="auth.loggedIn && auth.role === 'admin'">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">

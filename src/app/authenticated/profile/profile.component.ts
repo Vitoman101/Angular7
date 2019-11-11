@@ -56,4 +56,21 @@ export class ProfileComponent implements OnInit {
     this.pageOfItems = pageOfItems;
   }
 
+  delete(id: number) {
+    if (confirm("Are you sure that you want to delete selected item?")) {
+      this.advert.deleteAdvert(id)
+        .subscribe(
+          data => {
+            console.log(data)
+            this.getAdvertsOfUser();
+          },
+          error => {
+            console.log(error);
+            this.errorMessage = error.message;
+            this.errorStatus = true;
+          }
+        )
+    }
+  }
+
 }

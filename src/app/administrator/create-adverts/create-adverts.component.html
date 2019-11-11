@@ -1,55 +1,129 @@
-<div style="background-color: lightgray">
-  <div class="col-lg-4">
-    <h3>Create Courses</h3>
-    <div [hidden]="submitted">
-      <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="title">Title of advertisement</label>
-          <input type="text" class="form-control" id="title" required [(ngModel)]="advert.title" name="title">
-        </div>
-        <div class="form-group">
-          <label for="description">Description of advertisement</label>
-          <input type="text" class="form-control" id="description" required [(ngModel)]="advert.description"
-            name="description">
-        </div>
-        <div class="form-group">
-          <label for="pricePerUnit">Price per unit</label>
-          <input type="number" class="form-control" id="pricePerUnit" required [(ngModel)]="advert.pricePerUnit"
-            name="pricePerUnit">
-        </div>
-        <div class="form-group">
-          <label for="unitOfMeasure">Unit of measure</label>
-          <input type="text" class="form-control" id="unitOfMeasure" required [(ngModel)]="advert.unitOfMeasure"
-            name="unitOfMeasure">
-        </div>
-        <div class="form-group">
-          <label for="datePosted">Date posted</label>
-          <input type="text" class="form-control" id="datePosted" required [(ngModel)]="advert.datePosted"
-            name="datePosted">
-        </div>
-        <div class="form-group">
-          <label for="id_user">Select user</label>
-          <select class="form-control" id="id_user" name="id_user" [(ngModel)]="advert.id_user">
-            <option *ngFor="let user of users" [ngValue]="user.id">{{user.firstName}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="id_user">Select course</label>
-          <select class="form-control" id="id_course" name="id_course" [(ngModel)]="advert.id_course">
-            <option *ngFor="let course of courses" [ngValue]="course.id">{{course.title}}</option>
-          </select>
-        </div>
+<div class="container bg-light">
+  <div class="row p-3">
+    <div class="col-md-6">
+      <h3>Create Courses</h3>
 
+      <!--Error message appears if error occurs-->
+      <div *ngIf="errorStatus">
+        <h4>{{errorMessage}}</h4>
+      </div>
 
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
+      <!--Jump back button when submitted-->
+      <div [hidden]="!submitted">
+        <h4>You submitted successfully!</h4>
+        <button class="btn btn-outline-primary" (click)="submitted=false">Back</button>
+      </div>
+
+      <!--Form up that is showed as long as we dont subbmit or press back-->
+      <div [hidden]="submitted">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="title">Naslov reklame:</label>
+            <input type="text" class="form-control" id="title" required [(ngModel)]="advert.title" name="title"
+              placeholder="Dajem časove matematike povoljno">
+          </div>
+          <div class="form-group">
+            <label for="description">Opis:</label>
+            <textarea type="text" class="form-control" id="description" required [(ngModel)]="advert.description"
+              name="description" rows="3"></textarea>
+            <small class="text-secondary">Napišite nešto o vašem predavanju, gde ste radili ili slične korisne
+              informacije za one koje
+              interesuje ovaj oglas</small>
+          </div>
+          <div class="form-group">
+            <label for="pricePerUnit">Cena po času:</label>
+            <input type="number" class="form-control" id="pricePerUnit" required [(ngModel)]="advert.pricePerUnit"
+              name="pricePerUnit" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              placeholder="Navedite cenu u dinarima">
+          </div>
+          <div class="form-group">
+            <label for="unitOfMeasure">Trajanje časa:</label>
+            <input type="number" class="form-control" id="unitOfMeasure" required [(ngModel)]="advert.unitOfMeasure"
+              name="unitOfMeasure" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              placeholder="Navedite trajanje časa u minutama">
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefon:</label>
+            <input type="text" class="form-control" id="phone" required [(ngModel)]="advert.phone" name="phone"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              placeholder="065321321">
+          </div>
+          <div class="form-group">
+            <label for="id_user">Select course</label>
+            <select class="form-control" id="id_course" name="id_course" [(ngModel)]="advert.id_course">
+              <option *ngFor="let course of courses" [ngValue]="course.id">{{course.title}}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
     </div>
-  </div>
-  <div [hidden]="!submitted">
-    <h4>You submitted successfully!</h4>
-  </div>
+    <div class="row pt-3">
+      <div class="col-md-12 text-center">
+        <table class="table table-bordered" cdk-table [dataSource]="adverts">
+          <!-- Section title Definition -->
+          <ng-container cdkColumnDef="title">
+            <th cdk-header-cell *cdkHeaderCellDef> Title </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.title}} </td>
+          </ng-container>
 
-  <div *ngIf="errorStatus">
-    <h4>{{errorMessage}}</h4>
+          <!-- Age Definition -->
+          <ng-container cdkColumnDef="description">
+            <th cdk-header-cell *cdkHeaderCellDef> Description </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.description}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="datePosted">
+            <th cdk-header-cell *cdkHeaderCellDef> Date posted </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.datePosted | date}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="pricePerUnit">
+            <th cdk-header-cell *cdkHeaderCellDef> Price per unit </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.pricePerUnit}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="unitOfMeasure">
+            <th cdk-header-cell *cdkHeaderCellDef> Unit of Measure </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.unitOfMeasure}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="nicknamePoster">
+            <th cdk-header-cell *cdkHeaderCellDef> Nickname of poster </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.nicknamePoster}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="phone">
+            <th cdk-header-cell *cdkHeaderCellDef> Phone number </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.phone}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="course">
+            <th cdk-header-cell *cdkHeaderCellDef> ID of course </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.course.id}} </td>
+          </ng-container>
+
+          <!-- Title Definition -->
+          <ng-container cdkColumnDef="id">
+            <th cdk-header-cell *cdkHeaderCellDef> Delete </th>
+            <td cdk-cell *cdkCellDef="let row">
+              <button type="button" (click)="delete(row.id)" class="btn btn-danger">
+                <i class="navbar-toggler-icon fa fa-trash"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Header and Row Declarations -->
+          <tr cdk-header-row
+            *cdkHeaderRowDef="['title', 'description', 'id', 'datePosted', 'pricePerUnit', 'unitOfMeasure', 'nicknamePoster', 'phone', 'course']">
+          </tr>
+          <tr cdk-row
+            *cdkRowDef="let row; columns: ['title', 'description', 'id', 'datePosted', 'pricePerUnit', 'unitOfMeasure', 'nicknamePoster', 'phone', 'course']">
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+
   </div>
-</div>

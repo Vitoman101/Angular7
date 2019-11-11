@@ -65,5 +65,4 @@ export class AdvertisementComponent implements OnInit {
     this.save();
   }
 
-
 }
