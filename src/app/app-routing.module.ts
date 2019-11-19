@@ -16,9 +16,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdvertisementComponent } from './authenticated/advertisement/advertisement.component';
 import { SearchComponent } from './authenticated/search/search.component';
 import { DetailsComponent } from './authenticated/search/details/details.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'create-sections', component: CreateSectionsComponent },
   { path: 'create-courses', component: CreateCoursesComponent },
   { path: 'create-logins', component: CreateLoginComponent },

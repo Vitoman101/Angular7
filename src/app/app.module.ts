@@ -21,6 +21,7 @@ import { AdvertisementComponent } from './authenticated/advertisement/advertisem
 import { SearchComponent } from './authenticated/search/search.component';
 import { FilterPipe } from './authenticated/search/filter.pipe';
 import { DetailsComponent } from './authenticated/search/details/details.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DetailsComponent } from './authenticated/search/details/details.compone
     JwPaginationComponent,
     SearchComponent,
     FilterPipe,
-    DetailsComponent
+    DetailsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
